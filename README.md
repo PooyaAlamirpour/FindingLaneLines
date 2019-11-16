@@ -1,5 +1,5 @@
 # SELF-DRIVING CAR: Finding Lane Lines
-In this repository, I am going to implement Lane Lines Detection on a video. At the beginning of implementing this project, we have to set up some requirements. I recommend you see [this online](https://classroom.udacity.com/courses/ud1111 "Anaconda and Jupyter notebooks") free course in the Udacity for more information.
+In this repository, I am going to implement Lane Lines Detection on a video. At the beginning of implementing this project, we have to set up some requirements. I recommend you see [this online](https://classroom.udacity.com/courses/ud1111 "Anaconda and Jupyter notebooks") free course in the Udacity for more information about setting up suitable environment.
 Of course, I am using [Google Colab](https://colab.research.google.com/). It is easy and free.
 
 [Anaconda](https://anaconda.org/) is a distribution of packages built for data science. It comes with conda, a package and environment manager. You'll be using conda to create environments for isolating your projects that use different versions of Python and/or different packages. You'll also use it to install, uninstall, and update packages in your environments. Using Anaconda has made my life working with data much more pleasant.
@@ -41,9 +41,23 @@ plt.imshow(edges, cmap='Greys_r')
 
 
 ### HOUGH TRANSFORM
-A line in image space can be represented as a single point in parameter space, or Hough Space.
+A line in image space can be represented as a single point in parameter space, or Hough Space. We use this theory for detecting lines in a picture. So for achieving this goal, we should add the result of the Canny Algorithm to Hough.
 
 ![Hough Transform](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/HOUGH_TRANSFORM.png)
+
+Hough Algorithm has some parameters which have role key in tuning algorithm fine. You can either put a long time for tuning parameters of algorithm or put an especial mask for eliminating other unuseful areas from the picture. Check the difference between using and just tuning parameters of the Hough Algorithm.
+
+Big area selection(unMasked)
+```python
+vertices = np.array([[(0, imshape[0]), (0, 0), (imshape[1], 0), (imshape[1], imshape[0])]], dtype=np.int32)
+```
+![HOUGH TRANSFORM](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/hough_without_mask.png)
+
+Suitable area selection(Masked)
+```python
+vertices = np.array([[(0,imshape[0]),(450, 290), (490, 290), (imshape[1],imshape[0])]], dtype=np.int32)
+```
+![HOUGH TRANSFORM](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/hough_with_mask.png)
 
 ### Putting togather
 

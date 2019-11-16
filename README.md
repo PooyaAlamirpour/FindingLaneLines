@@ -16,22 +16,29 @@ Values from 0 (dark) to 255 (bright) in Red, Green, and Blue color channels.
 ### REGION MASKING
 Add criteria in code to only focus on a specific region of an image, since lane lines will always appear in the same general part of the image.
 
-After running `ColorLaneLinesDetection.py`, you must see the below picture as a result. This code extracts white pixels as lane lines. Then by putting a triangular mask, we can limit the area of exploring.
+After running `ColorLaneLinesDetection.py`, you must see the below pictures as the result. This code extracts white pixels as lane lines. Then by putting a triangular mask, we can limit the area of exploring.
 ```python
 plt.imshow(region_select)
 ```
-![Color Selection](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/mask_color.png)
+![REGION MASKING](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/mask_color.png)
 
 ```python
 plt.imshow(line_image)
 ```
-![Color Selection](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/final_color_mask.png)
+![REGION MASKING](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/final_color_mask.png)
 
 ### CANNY EDGE DETECTION
 Find edges by looking for strong gradient, i.e. very different values between adjacent pixels.
 ```python
 edges = cv2.Canny(gray, low_threshold, high_threshold)
 ```
+
+For exploring of Canny Edge Detection, run `CannytoDetectLaneLines.py` code. After successfully running you must see the below picture as the result.
+```python
+plt.imshow(edges, cmap='Greys_r')
+```
+![CANNY EDGE DETECTION](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/canny_edges.png)
+
 
 ### HOUGH TRANSFORM
 A line in image space can be represented as a single point in parameter space, or Hough Space.

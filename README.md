@@ -9,7 +9,7 @@ Of course, I am using [Google Colab](https://colab.research.google.com/). It is 
 Useful features for identifying lane lines: color, shape, orientation, position. We’ll start with color detection, then region masking, then finding edges, and finally using a Hough Transform to identify line segments.
 
 ### COLOR SELECTION
-Values from 0 (dark) to 255 (bright) in Red, Green, and Blue color channels.
+Values from 0 (dark) to 255 (bright) in Red, Green, and Blue color channels. it is possible we extract lane lines by choosing just white pixels. But there are some areas that have white pixels that do not belong to the lane line. For eliminating these areas we can use region masking.
 
 ![Color Selection](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/COLOR_SELECTION.png)
 
@@ -45,7 +45,7 @@ A line in image space can be represented as a single point in parameter space, o
 
 ![Hough Transform](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/HOUGH_TRANSFORM.png)
 
-Hough Algorithm has some parameters which have role key in tuning algorithm fine. You can either put a long time for tuning parameters of algorithm or put an especial mask for eliminating other unuseful areas from the picture. Check the difference between using and just tuning parameters of the Hough Algorithm.
+Hough Algorithm has some parameters which have role key in tuning algorithm fine. You can either put a long time for tuning parameters of algorithm or put an especial mask for eliminating other unuseful areas from the picture. Check the difference between using masked area and just tuning parameters of the Hough Algorithm.
 
 Big area selection(unMasked)
 ```python

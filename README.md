@@ -99,9 +99,9 @@ min_line_length = 2
 max_line_gap = 130
 ```
 
-If you want to run this algorithm clone this repository and run `main.py`. You can see the result here:
+If you want to run this algorithm clone this repository and run `main.py`. You can see the result as below. The blue lines show the detected lane on the road.
 
-![Improving](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png)
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
 
 ```python
 for line in lines:

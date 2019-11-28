@@ -17,7 +17,7 @@ At the beginning of this project let me show you why we can not use just color s
 Anyway, I want to show you practically by using python and OpenCV which is a powerful tool for image processing.
 
 ### COLOR SELECTION
-Values from 0 (dark) to 255 (bright) in Red, Green, and Blue color channels. it is possible we extract lane lines by choosing just white pixels. But there are some areas that have white pixels that do not belong to the lane line. For eliminating these areas we can use region masking. Add criteria in code to only focus on a specific region of an image, since lane lines will always appear in the same general part of the image.
+Values from 0 (dark) to 255 (bright) in Red, Green, and Blue color channels. it is possible we extract lane lines by choosing just white pixels. But there are some areas that have white pixels that do not belong to the lane line. For eliminating these areas we can use region masking. Add criteria in code to only focus on a specific region of an image, since lane lines will always appear in the same general part of the image. So it is another problem of Color Segmentation Algorithm. 
 If you want to test practically just clone this repository and use `ColorLaneLinesDetection.py`. After running `ColorLaneLinesDetection.py`, you must see the below pictures as the result. This code extracts white pixels as lane lines. Then by putting a triangular mask, we can limit the area of exploring.
 ```python
 plt.imshow(region_select)
@@ -29,8 +29,13 @@ plt.imshow(line_image)
 ```
 ![REGION MASKING](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/final_color_mask.png)
 
+So let's continue our steps to find lane lines. We'll start with the Canny Algorithm. 
+
 ### CANNY EDGE DETECTION
-Find edges by looking for strong gradient, i.e. very different values between adjacent pixels.
+The Canny edge detector is an edge detection operator that uses a multi-stage algorithm to detect a wide range of edges in images. It was developed by John F. Canny in 1986. Canny also produced a computational theory of edge detection explaining why the technique works.
+An edge in an image may point in a variety of directions, so the Canny algorithm uses four filters to detect horizontal, vertical and diagonal edges in the blurred image by Finding the intensity gradients of the image.
+After applying gradient calculation, the edge extracted from the gradient value is still quite blurred. Thus non-maximum suppression can help to suppress all the gradient values (by setting them to 0) except the local maxima, which indicate locations with the sharpest change of intensity value.
+
 ```python
 edges = cv2.Canny(gray, low_threshold, high_threshold)
 ```
@@ -41,6 +46,7 @@ plt.imshow(edges, cmap='Greys_r')
 ```
 ![CANNY EDGE DETECTION](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/canny_edges.png)
 
+As you can see, just the important lines of the image which have strong edges have remained. The main question is, how we can extract straight lines from an image. The Hough Algorithm can answer this question.
 
 ### HOUGH TRANSFORM
 A line in image space can be represented as a single point in parameter space, or Hough Space. We use this theory for detecting lines in a picture. So for achieving this goal, we should add the result of the Canny Algorithm to Hough.
@@ -68,3 +74,4 @@ vertices = np.array([[(0,imshape[0]),(450, 290), (490, 290), (imshape[1],imshape
 * [A Gentle Introduction to Computer Vision](https://machinelearningmastery.com/what-is-computer-vision/)
 * [Udacity free course ​Intro to Computer Vision](https://www.udacity.com/course/introduction-to-computer-vision--ud810)
 * [OpenCV](https://opencv.org/)
+* [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector)

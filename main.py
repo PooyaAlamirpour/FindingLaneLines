@@ -62,7 +62,6 @@ def run():
         last_line = None
         left_line_list = []
         for line in lines:
-            # print('line: ', line, '-', (line[0][0] < left_line) * line)
             left_l = (line[0][0] < left_line) * line
             if left_l[0][0] != 0:
                 left_line_list.append(left_l)
@@ -78,7 +77,6 @@ def run():
                 cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
 
         x1, y1, x2, y2 = improve_lane(last_line, image.shape)
-        # print('x1: ', x1, '-y1:', y1, '-x2:', x2, '-y2:', y2)
         cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 17)
 
         color_edges = np.dstack((edges, edges, edges))

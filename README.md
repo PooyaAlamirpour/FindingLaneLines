@@ -72,10 +72,58 @@ vertices = np.array([[(0,imshape[0]),(450, 290), (490, 290), (imshape[1],imshape
 
 ### Putting togather
 Now it is time to put all our knowledge together for finding lanes in a video. This video is a source for testing our algorithm for finding lanes. You can find `solidWhiteRight.mp4` inside of the `test_videos` folder.
+Click on the below image and see the source video.
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Bp-uvoz74hs" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/raw_solidWhiteRight.png" alt="solidWhiteRight.mp4" width="375" height="223" border="10" /></a>
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=Bp-uvoz74hs" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/raw_solidWhiteRight.png" alt="solidWhiteRight.mp4" width="240" height="180" border="10" /></a>
 
+```python
+video = cv2.VideoCapture('test_videos\solidWhiteRight.mp4')
+frame = video.read()
+```
 
+```python
+kernel_size = 5
+low_threshold = 120
+high_threshold = 170
+
+ignore_mask_color = 255
+rho = 2
+theta = np.pi/180
+threshold = 50
+min_line_length = 2
+max_line_gap = 130
+```
+
+```python
+	for line in lines:
+		left_l = (line[0][0] < left_line) * line
+		if left_l[0][0] != 0:
+			left_line_list.append(left_l)
+		if max_value < left_l[0][1]:
+			max_value = left_l[0][1]
+			last_line = left_l[0]
+			if max_value < left_l[0][3]:
+				max_value = left_l[0][3]
+				last_line = left_l[0]
+```
+
+```python
+x1, y1, x2, y2 = improve_lane(last_line, image.shape)
+cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 17)
+```
+
+```python
+def improve_lane(last_line, shape):
+    x1 = last_line[0]
+    y1 = last_line[1]
+    x2 = last_line[2]
+    y2 = last_line[3]
+    y, x, layer = shape
+    m = ((y2 - y1)/(x2 - x1))
+    x = (1/m)*(y - y1) + x1
+    x = floor(x)
+    return [x1, y1, x, y]
+```
 
 ### REFERENCES
 * [A Gentle Introduction to Computer Vision](https://machinelearningmastery.com/what-is-computer-vision/)

@@ -141,7 +141,7 @@ def improve_lane(last_line, shape):
     x = floor(x)
     return [x1, y1, x, y]
 ```
-You can the final result in the below video.
+You can see the final result in the below video.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
 

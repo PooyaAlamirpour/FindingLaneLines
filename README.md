@@ -73,7 +73,7 @@ vertices = np.array([[(0,imshape[0]),(450, 290), (490, 290), (imshape[1],imshape
 ### Putting togather
 Now it is time to put all our knowledge together for finding lanes in a video. This video is a source for testing our algorithm for finding lanes. You can find `solidWhiteRight.mp4` inside of the `test_videos` folder.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=Bp-uvoz74hs" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="solidWhiteRight.mp4" width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Bp-uvoz74hs" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/raw_solidWhiteRight.png" alt="solidWhiteRight.mp4" width="240" height="180" border="10" /></a>
 
 
 

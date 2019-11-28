@@ -76,11 +76,15 @@ Click on the below image and see the source video.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=Bp-uvoz74hs" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/raw_solidWhiteRight.png" alt="solidWhiteRight.mp4" width="375" height="223" border="10" /></a>
 
+Processing a video is as same as processing an image; the difference is that the video consists of lots of sequential images. So at first, we must load and extract all frames of a video.
 
 ```python
 video = cv2.VideoCapture('test_videos\solidWhiteRight.mp4')
+# This line extracts just one frame in each run.
 frame = video.read()
 ```
+
+In this project, it is used, Canny edge detection and hough algorithm. Both of them have some parameters that it has to tune first. I use below value for their parameters.
 
 ```python
 kernel_size = 5
@@ -94,6 +98,10 @@ threshold = 50
 min_line_length = 2
 max_line_gap = 130
 ```
+
+If you want to run this algorithm clone this repository and run `main.py`. You can see the result here:
+
+![Improving](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png)
 
 ```python
 for line in lines:

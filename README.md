@@ -99,9 +99,15 @@ min_line_length = 2
 max_line_gap = 130
 ```
 
-If you want to run this algorithm clone this repository and run `main.py`. You can see the result as below. The blue lines show the detected lane on the road.
+If you want to run this algorithm clone this repository and run `main.py`. You can see the result as below. The blue lines show the detected lane on the road. Click on the image for watching the video result.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=c5Q6f3Jgbqw" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
+
+If you watch the above video you will see there is a gap between the bottom of the video and the last lane. 
+
+![Improving](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/gap_SolidWhiteRight.png)
+
+Because the hough algorithm is not able to find a destination point at the bottom of the video. So the line would not be continuous. For solving this issue, I recommend a simple solution.  As you know, the output of the Hough Algorithm consists of some lines. I found the last left line and try to continue that line by using the line equation.
 
 ```python
 for line in lines:
@@ -116,7 +122,7 @@ for line in lines:
 			last_line = left_l[0]
 ```
 
-![Improving](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/gap_SolidWhiteRight.png)
+The line equation was implemented in a function is named improve_lane.
 
 ```python
 x1, y1, x2, y2 = improve_lane(last_line, image.shape)
@@ -135,6 +141,9 @@ def improve_lane(last_line, shape):
     x = floor(x)
     return [x1, y1, x, y]
 ```
+You can the final result in the below video.
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
 
 ### REFERENCES
 * [A Gentle Introduction to Computer Vision](https://machinelearningmastery.com/what-is-computer-vision/)

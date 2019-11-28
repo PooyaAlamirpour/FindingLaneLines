@@ -2,21 +2,23 @@
 In this repository, I am going to implement Lane Lines Detection on a video. At the beginning of implementing this project, we have to set up some requirements. I recommend you see [this online](https://classroom.udacity.com/courses/ud1111 "Anaconda and Jupyter notebooks") free course in the Udacity for more information about setting up suitable environment.
 Of course, I am using [Google Colab](https://colab.research.google.com/). It is easy and free.
 
-[Anaconda](https://anaconda.org/) is a distribution of packages built for data science. It comes with conda, a package and environment manager. You'll be using conda to create environments for isolating your projects that use different versions of Python and/or different packages. You'll also use it to install, uninstall, and update packages in your environments. Using Anaconda has made my life working with data much more pleasant.
-
+There is another powerful tool is named [Anaconda](https://anaconda.org/). Anaconda is a distribution of packages built for data science. It comes with conda, a package and environment manager. You'll be using conda to create environments for isolating your projects that use different versions of Python and/or different packages. You'll also use it to install, uninstall, and update packages in your environments. Using Anaconda has made my life working with data much more pleasant.
+So it depends on you which tool will be selected.
 
 ### STEPS TO FIND LANE LINES
-Useful features for identifying lane lines: color, shape, orientation, position. We’ll start with color detection, then region masking, then finding edges, and finally using a Hough Transform to identify line segments.
+For lane detection on a video, we have to pass some steps that you can see below:
+* Getting each frame from video
+* Making grayscale each frame
+* Detecting edges by using Canny Algorithm
+* Finding Lane by using Hough Algorithm
+* Improving output and making a new video as a result
+
+At the beginning of this project let me show you why we can not use just color segmentation for finding a lane in a video. As clear, often the color of the lane is white. When daylight is enough you can detect white lanes easily, But think about the night. It is hardly possible to detect the lanes. But it is not the only reason to refuse the color segmentation algorithm. You can imagine there are lots of objects would be either near white or completely white in the real world. Objects have some features such as color, shape, orientation, position, etc that would be helpful for us for detecting them.
+Anyway, I want to show you practically by using python and OpenCV which is a powerful tool for image processing.
 
 ### COLOR SELECTION
-Values from 0 (dark) to 255 (bright) in Red, Green, and Blue color channels. it is possible we extract lane lines by choosing just white pixels. But there are some areas that have white pixels that do not belong to the lane line. For eliminating these areas we can use region masking.
-
-![Color Selection](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/COLOR_SELECTION.png)
-
-### REGION MASKING
-Add criteria in code to only focus on a specific region of an image, since lane lines will always appear in the same general part of the image.
-
-After running `ColorLaneLinesDetection.py`, you must see the below pictures as the result. This code extracts white pixels as lane lines. Then by putting a triangular mask, we can limit the area of exploring.
+Values from 0 (dark) to 255 (bright) in Red, Green, and Blue color channels. it is possible we extract lane lines by choosing just white pixels. But there are some areas that have white pixels that do not belong to the lane line. For eliminating these areas we can use region masking. Add criteria in code to only focus on a specific region of an image, since lane lines will always appear in the same general part of the image.
+If you want to test practically just clone this repository and use `ColorLaneLinesDetection.py`. After running `ColorLaneLinesDetection.py`, you must see the below pictures as the result. This code extracts white pixels as lane lines. Then by putting a triangular mask, we can limit the area of exploring.
 ```python
 plt.imshow(region_select)
 ```

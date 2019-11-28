@@ -49,25 +49,32 @@ plt.imshow(edges, cmap='Greys_r')
 As you can see, just the important lines of the image which have strong edges have remained. The main question is, how we can extract straight lines from an image. The Hough Algorithm can answer this question.
 
 ### HOUGH TRANSFORM
+The Hough transform is a feature extraction technique used in image analysis, computer vision, and digital image processing. The purpose of the technique is to find imperfect instances of objects within a certain class of shapes by a voting procedure. This voting procedure is carried out in a parameter space, from which object candidates are obtained as local maxima in a so-called accumulator space that is explicitly constructed by the algorithm for computing the Hough transform.
+The classical Hough transform was concerned with the identification of lines in the image, but later the Hough transform has been extended to identifying positions of arbitrary shapes, most commonly circles or ellipses.
 A line in image space can be represented as a single point in parameter space, or Hough Space. We use this theory for detecting lines in a picture. So for achieving this goal, we should add the result of the Canny Algorithm to Hough.
 
 ![Hough Transform](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/HOUGH_TRANSFORM.png)
 
-Hough Algorithm has some parameters which have role key in tuning algorithm fine. You can either put a long time for tuning parameters of algorithm or put an especial mask for eliminating other unuseful areas from the picture. Check the difference between using masked area and just tuning parameters of the Hough Algorithm.
+Hough Algorithm has some parameters which have role key in tuning algorithm fine. You can either put a long time for tuning parameters of algorithm or put an especial mask for eliminating other unuseful areas from the picture. Check the difference between using masked area and just tuning parameters of the Hough Algorithm. In the below images you can see the detected lines as red color.
 
-Big area selection(unMasked)
+Without Area Selection(unMasked)
 ```python
 vertices = np.array([[(0, imshape[0]), (0, 0), (imshape[1], 0), (imshape[1], imshape[0])]], dtype=np.int32)
 ```
 ![HOUGH TRANSFORM](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/hough_without_mask.png)
 
-Suitable area selection(Masked)
+Suitable Area Selection(Masked)
 ```python
 vertices = np.array([[(0,imshape[0]),(450, 290), (490, 290), (imshape[1],imshape[0])]], dtype=np.int32)
 ```
 ![HOUGH TRANSFORM](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/hough_with_mask.png)
 
+
 ### Putting togather
+Now it is time to put all our knowledge together for finding lanes in a video. This video is a source for testing our algorithm for finding lanes. You can find `solidWhiteRight.mp4` inside of the `test_videos` folder.
+
+![solidWhiteRight.mp4](https://i.ytimg.com/vi/Bp-uvoz74hs/hqdefault.jpg)](https://www.youtube.com/watch?v=Bp-uvoz74hs)
+
 
 
 ### REFERENCES
@@ -75,3 +82,4 @@ vertices = np.array([[(0,imshape[0]),(450, 290), (490, 290), (imshape[1],imshape
 * [Udacity free course ​Intro to Computer Vision](https://www.udacity.com/course/introduction-to-computer-vision--ud810)
 * [OpenCV](https://opencv.org/)
 * [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector)
+* [Hough transform](https://en.wikipedia.org/wiki/Hough_transform)

@@ -20,7 +20,7 @@ rho = 2
 theta = np.pi/180
 threshold = 50
 min_line_length = 2
-max_line_gap = 130     
+max_line_gap = 130
 
 frames_list = []
 video_name = 'test_videos_output\output_solidWhiteRight.avi'

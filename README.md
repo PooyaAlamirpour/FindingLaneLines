@@ -73,6 +73,7 @@ vertices = np.array([[(0,imshape[0]),(450, 290), (490, 290), (imshape[1],imshape
 ### Putting togather
 Now it is time to put all our knowledge together for finding lanes in a video. This video is a source for testing our algorithm for finding lanes. You can find `solidWhiteRight.mp4` inside of the `test_videos` folder.
 Click on the below image and see the source video.
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=Bp-uvoz74hs" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/raw_solidWhiteRight.png" alt="solidWhiteRight.mp4" width="375" height="223" border="10" /></a>
 
 
@@ -95,17 +96,19 @@ max_line_gap = 130
 ```
 
 ```python
-	for line in lines:
-		left_l = (line[0][0] < left_line) * line
-		if left_l[0][0] != 0:
-			left_line_list.append(left_l)
-		if max_value < left_l[0][1]:
-			max_value = left_l[0][1]
+for line in lines:
+	left_l = (line[0][0] < left_line) * line
+	if left_l[0][0] != 0:
+		left_line_list.append(left_l)
+	if max_value < left_l[0][1]:
+		max_value = left_l[0][1]
+		last_line = left_l[0]
+		if max_value < left_l[0][3]:
+			max_value = left_l[0][3]
 			last_line = left_l[0]
-			if max_value < left_l[0][3]:
-				max_value = left_l[0][3]
-				last_line = left_l[0]
 ```
+
+![Improving](https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/gap_SolidWhiteRight.png)
 
 ```python
 x1, y1, x2, y2 = improve_lane(last_line, image.shape)

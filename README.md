@@ -145,9 +145,9 @@ You can see the final result in the below video.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
 
-Now, we have a suitable idea for improving our solution. As you know, the Hough Algorithm has multiple outputs. It means for a line in an image there would be lots of output from the Hough Algorithm. We can either calculate the average between all of the outputs or using the line equation for drawing just one line. You can use both of them. In this project, I used the second solution. For running this idea practically, you should clone this repository and run the `main_2.py`. You can see video result below:
+Now, we have a suitable idea for improving our solution. As you know, the Hough Algorithm has multiple outputs. It means for a line in an image there would be lots of output from the Hough Algorithm. We can either calculate the average between all of the outputs or using the line equation for modelling and drawing just one line. You can use both of them. In this project, I used the second solution. For running this idea practically, you should clone this repository and run the `main_2.py`. You can see video result below:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=bw_wWoEjOqQ" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
 
 for implementing that goal I changed the `improve_lane` function.
 
@@ -171,8 +171,24 @@ def improve_lane(last_line, shape, top_line):
 You can see the using of the new `improve_lane` function below:
 
 ```python
+x1_t, y1_t, x2_t, y2_t = improve_lane(last_line_l_top, image.shape, top_line)
+x1_b, y1_b, x2_b, y2_b = improve_lane(last_line_l_bottom, image.shape, top_line)
+x1 = floor((x1_t + x1_b) * 0.5)
+y1 = floor((y1_t + y1_b) * 0.5)
+x2 = floor((x2_t + x2_b) * 0.5)
+y2 = floor((y2_t + y2_b) * 0.5)
+cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
 
+x1_t, y1_t, x2_t, y2_t = improve_lane(last_line_r_top, image.shape, top_line)
+x1_b, y1_b, x2_b, y2_b = improve_lane(last_line_r_bottom, image.shape, top_line)
+x1 = floor((x1_t + x1_b) * 0.5)
+y1 = floor((y1_t + y1_b) * 0.5)
+x2 = floor((x2_t + x2_b) * 0.5)
+y2 = floor((y2_t + y2_b) * 0.5)
+cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
 ```
+
+By using this idea we can even detect the yellow lane in a video continuously. So it does not matter the dash-line is the left side or the right side of the screen. We can extract the lane from both sides of the screen.
 
 ### REFERENCES
 * [A Gentle Introduction to Computer Vision](https://machinelearningmastery.com/what-is-computer-vision/)

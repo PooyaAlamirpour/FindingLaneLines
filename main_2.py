@@ -121,7 +121,7 @@ def run():
 
         x1_t, y1_t, x2_t, y2_t = improve_lane(last_line_l_top, image.shape, top_line)
         x1_b, y1_b, x2_b, y2_b = improve_lane(last_line_l_bottom, image.shape, top_line)
-        x1 = floor((x1_t + x1_b)*0.5)
+        x1 = floor((x1_t + x1_b) * 0.5)
         y1 = floor((y1_t + y1_b) * 0.5)
         x2 = floor((x2_t + x2_b) * 0.5)
         y2 = floor((y2_t + y2_b) * 0.5)

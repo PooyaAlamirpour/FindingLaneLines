@@ -190,6 +190,8 @@ cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
 
 By using this idea we can even detect the yellow lane in a video continuously. So it does not matter the dash-line is the left side or the right side of the screen. We can extract the lane from both sides of the screen.
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=45Oo_rNoZEQ" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_yellow_line.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
+
 ### REFERENCES
 * [A Gentle Introduction to Computer Vision](https://machinelearningmastery.com/what-is-computer-vision/)
 * [Udacity free course ​Intro to Computer Vision](https://www.udacity.com/course/introduction-to-computer-vision--ud810)

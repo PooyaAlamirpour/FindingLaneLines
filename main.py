@@ -7,6 +7,8 @@ from base64 import b64encode
 from math import floor
 
 video = cv2.VideoCapture('test_videos\solidWhiteRight.mp4')
+# video = cv2.VideoCapture('test_videos\solidYellowLeft.mp4')
+# video = cv2.VideoCapture('test_videos\challenge.mp4')
 nFrames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
 fps = video.get(cv2.CAP_PROP_FPS)
 waitPerFrameInMillisec = int(1/fps * 1000/1)
@@ -24,6 +26,8 @@ max_line_gap = 130
 
 frames_list = []
 video_name = 'test_videos_output\output_solidWhiteRight.avi'
+# video_name = 'test_videos_output\output_solidYellowLeft.avi'
+# video_name = 'test_videos_output\output_challenge.avi'
 success, image = video.read()
 height, width, layers = image.shape
 size = (width, height)
@@ -76,8 +80,8 @@ def run():
             for x1, y1, x2, y2 in line:
                 cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
 
-        x1, y1, x2, y2 = improve_lane(last_line, image.shape)
-        cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 17)
+        # x1, y1, x2, y2 = improve_lane(last_line, image.shape)
+        # cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 17)
 
         color_edges = np.dstack((edges, edges, edges))
         lines_edges = cv2.addWeighted(color_edges, 0.8, line_image, 1, 0)

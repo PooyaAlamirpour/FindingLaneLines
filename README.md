@@ -145,6 +145,35 @@ You can see the final result in the below video.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
 
+Now, we have a suitable idea for improving our solution. As you know, the Hough Algorithm has multiple outputs. It means for a line in an image there would be lots of output from the Hough Algorithm. We can either calculate the average between all of the outputs or using the line equation for drawing just one line. You can use both of them. In this project, I used the second solution. For running this idea practically, you should clone this repository and run the `main_2.py`. You can see video result below:
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=7Kki_pW9k7A" target="_blank"><img src="https://github.com/PooyaAlamirpour/FindingLaneLines/blob/master/Pictures/result_Solid_white_right.png" alt="output_solidWhiteRight.avi" width="375" height="223" border="10" /></a>
+
+for implementing that goal I changed the `improve_lane` function.
+
+```python
+def improve_lane(last_line, shape, top_line):
+    x1 = last_line[0]
+    y1 = last_line[1]
+    x2 = last_line[2]
+    y2 = last_line[3]
+    y_bottom, x, layer = shape
+    y_top = top_line + 10
+
+    m = ((y2 - y1)/(x2 - x1))
+
+    x_top = floor( (1/m) * (y_top - y1) + x1)
+    x_bottom = floor((1/m) * (y_bottom - y1) + x1)
+
+    return [x_top, y_top, x_bottom, y_bottom]
+```
+
+You can see the using of the new `improve_lane` function below:
+
+```python
+
+```
+
 ### REFERENCES
 * [A Gentle Introduction to Computer Vision](https://machinelearningmastery.com/what-is-computer-vision/)
 * [Udacity free course ​Intro to Computer Vision](https://www.udacity.com/course/introduction-to-computer-vision--ud810)
